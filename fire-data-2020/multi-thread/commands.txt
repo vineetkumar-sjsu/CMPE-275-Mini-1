@@ -1,0 +1,31 @@
+# ------------------------------------------- #
+# Build commands
+# Clean build (if needed)
+rm -rf build
+
+# Create build directory and configure
+mkdir build
+cd build
+cmake ..
+
+# Build the project
+make
+
+# Return to project root
+cd ..
+# ------------------------------------------- #
+# Run with 1 thread (sequential)
+OMP_NUM_THREADS=1 ./build/fire-data-analyzer
+
+# Run with 2 threads
+OMP_NUM_THREADS=2 ./build/fire-data-analyzer
+
+# Run with 4 threads (optimal performance)
+OMP_NUM_THREADS=4 ./build/fire-data-analyzer
+
+# Run with 8 threads
+OMP_NUM_THREADS=8 ./build/fire-data-analyzer
+
+# Run with default system thread count
+./build/fire-data-analyzer
+# ------------------------------------------- #

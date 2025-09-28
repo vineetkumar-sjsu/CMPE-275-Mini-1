@@ -1,0 +1,104 @@
+=== Fire Data Analyzer ===
+Loading fire data from: data
+Loaded 1167525 records in 1610 milliseconds
+
+=== DATA STATISTICS ===
+Total records: 1167525
+Date range: 2020-08-10 to 2020-09-24
+AQI range: -999 to 7190
+Number of unique dates: 43
+
+Parameter distribution:
+  CO: 59666 records
+  NO2: 97613 records
+  OZONE: 478728 records
+  PM10: 125784 records
+  PM2.5: 334402 records
+  SO2: 71332 records
+
+=== SAMPLE QUERIES ===
+
+1. Getting AQI data for 2020-08-15:
+Query completed in 18838 microseconds
+Found 26900 records for date: 2020-08-15
+Sample records:
+  Crescent City - AQI: 74 (PM2.5: 23 UG/M3)
+  Jacobs - AQI: 13 (PM10: 14 UG/M3)
+  Florence-Department of Forestry - AQI: 33 (PM2.5: 8 UG/M3)
+  Klamath Glen - AQI: 70 (PM2.5: 20.9 UG/M3)
+  Fort Bragg High School - AQI: 6 (PM10: 7 UG/M3)
+
+2. Getting days with AQI above 100:
+Query completed in 61777 microseconds
+Found 43 days with AQI above 100
+Days with high AQI:
+  2020-08-10
+  2020-08-14
+  2020-08-15
+  2020-08-16
+  2020-08-17
+  2020-08-18
+  2020-08-19
+  2020-08-20
+  2020-08-21
+  2020-08-22
+  2020-08-23
+  2020-08-24
+  2020-08-25
+  2020-08-26
+  2020-08-27
+  2020-08-28
+  2020-08-29
+  2020-08-30
+  2020-08-31
+  2020-09-01
+  2020-09-02
+  2020-09-03
+  2020-09-04
+  2020-09-05
+  2020-09-06
+  2020-09-07
+  2020-09-08
+  2020-09-09
+  2020-09-10
+  2020-09-11
+  2020-09-12
+  2020-09-13
+  2020-09-14
+  2020-09-15
+  2020-09-16
+  2020-09-17
+  2020-09-18
+  2020-09-19
+  2020-09-20
+  2020-09-21
+  2020-09-22
+  2020-09-23
+  2020-09-24
+
+3. Getting average AQI for 2020-08-20:
+Average AQI query completed in 5511 microseconds
+Average AQI: -27.71
+
+=== PERFORMANCE TESTING ===
+Query completed in 18707 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18584 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18622 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18576 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18709 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18629 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18652 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18795 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18670 microseconds
+Found 26900 records for date: 2020-08-15
+Query completed in 18901 microseconds
+Found 26900 records for date: 2020-08-15
+10 date queries took 192436 microseconds (avg: 19243 μs per query)
