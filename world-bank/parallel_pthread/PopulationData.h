@@ -13,7 +13,7 @@
 
 class PopulationData {
 private:
-    // Data structure to store population data
+
     // Key: Country Code (e.g., "USA", "CHN")
     // Value: Map of year to population
     std::unordered_map<std::string, std::unordered_map<int, long long>> countryData;
