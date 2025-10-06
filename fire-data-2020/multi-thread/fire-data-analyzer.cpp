@@ -29,18 +29,11 @@ struct AirQualityRecord
     std::string siteId;
     std::string fullSiteId;
 
-    // Extract date from datetime (YYYY-MM-DD)
     std::string getDate() const
     {
         return datetime.substr(0, 10);
     }
 
-    // Extract hour from datetime
-    int getHour() const
-    {
-        std::string hourStr = datetime.substr(11, 2);
-        return std::stoi(hourStr);
-    }
 };
 
 class FireDataAnalyzer
@@ -105,7 +98,6 @@ public:
 
         try
         {
-            // 1st potential candidate for OMP parallelization
             std::vector<std::string> files;
             for (const auto &entry : std::filesystem::recursive_directory_iterator(dataDir))
             {
@@ -193,7 +185,7 @@ public:
         file.close();
     }
 
-    // Query 1: Get AQI data for a specific date
+    // Get AQI data for a specific date
     std::vector<AirQualityRecord> getAQIDataForDate(const std::string &targetDate)
     {
         auto start = std::chrono::high_resolution_clock::now();
@@ -233,14 +225,14 @@ for (auto &local : localResults) {
         return results;
     }
 
-    // Query 2: Get dates where AQI was above a threshold
+    // Get dates where AQI was above a threshold
     std::vector<std::string> getDaysWithAQIAbove(int threshold)
     {
         auto start = std::chrono::high_resolution_clock::now();
 
         std::map<std::string, int> dateMaxAQI;
 
-        // Find maximum AQI for each date
+        // Find max AQI for each date
         std::vector<std::unordered_map<std::string, int>> localMaps(omp_get_max_threads());
 
 #pragma omp parallel
@@ -261,7 +253,7 @@ for (auto &local : localResults) {
             }
         }
 
-        // Merge results
+        // merge results
         for (auto &localMap : localMaps)
         {
             for (auto &p : localMap)
@@ -294,7 +286,7 @@ for (auto &local : localResults) {
         return results;
     }
 
-    // Additional query: Get average AQI for a date
+    // Get average AQI for a date
     double getAverageAQIForDate(const std::string &targetDate)
     {
         auto start = std::chrono::high_resolution_clock::now();
@@ -321,6 +313,7 @@ for (auto &local : localResults) {
     }
 
     // Get statistics about the loaded data
+    // done by AI
     void printDataStatistics()
     {
         if (records.empty())
@@ -359,19 +352,17 @@ for (auto &local : localResults) {
 
 int main()
 {
+    // formatting of output done by AI
     std::cout << "=== Fire Data Analyzer ===" << std::endl;
 
     FireDataAnalyzer analyzer;
 
-    // Load data from the data directory
     analyzer.loadData("data");
-
-    // Print statistics
     analyzer.printDataStatistics();
 
     std::cout << "\n=== SAMPLE QUERIES ===" << std::endl;
 
-    // Example Query 1: Get AQI data for a specific day
+    // Get AQI for specific date
     std::cout << "\n1. Getting AQI data for 2020-08-15:" << std::endl;
     auto dayData = analyzer.getAQIDataForDate("2020-08-15");
 
@@ -387,7 +378,7 @@ int main()
         }
     }
 
-    // Example Query 2: Get days where AQI was above 100
+    //  Get days where AQI was above 100
     std::cout << "\n2. Getting days with AQI above 100:" << std::endl;
     auto highAQIDays = analyzer.getDaysWithAQIAbove(100);
 
@@ -397,7 +388,7 @@ int main()
         std::cout << "  " << date << std::endl;
     }
 
-    // Example Query 3: Get average AQI for a specific date
+    // Get average AQI for a specific date
     std::cout << "\n3. Getting average AQI for 2020-08-20:" << std::endl;
     double avgAQI = analyzer.getAverageAQIForDate("2020-08-20");
     std::cout << "Average AQI: " << std::fixed << std::setprecision(2) << avgAQI << std::endl;
